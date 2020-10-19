@@ -10,14 +10,18 @@ const server = app.listen(port, () => {
 });
 
 app.use(express.static('public'));
-//app.use(express.json({ limit: '1mb' }));
+//app.use(express.json({ limit: '1mb' })); //not sure what this does
 
-app.get('/test', async (req, res) => {
-  //res.send('Hello World!')
+app.get('/categories', async (req, res) => {
   const api_url = "https://radical.directory/categories.json";
-  //const api_url = "https://api.wheretheiss.at/v1/satellites";
   const fetch_response = await fetch(api_url);
   const fetch_data = await fetch_response.json();
-  //res.send(fetch_response);
+  res.json(fetch_data);
+});
+
+app.get('/directory-topics', async (req, res) => {
+  const api_url = "https://radical.directory/c/6.json";
+  const fetch_response = await fetch(api_url);
+  const fetch_data = await fetch_response.json();
   res.json(fetch_data);
 });
